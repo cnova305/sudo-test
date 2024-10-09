@@ -3,3 +3,8 @@ export type MenuOption = {
   label: string;
   number: string[];
 };
+
+export type InteractiveVoiceRecording = {
+  name: string;
+  options: MenuOption[];
+};

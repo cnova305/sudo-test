@@ -1,7 +1,7 @@
 import "../App.css";
 
 import { Box, Card, Stack, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { IoAddCircle, IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { MenuOption } from "../types";
 import {
@@ -19,13 +19,16 @@ const MenuOptionCard = ({
   options: MenuOption[];
   setOptions: (options: MenuOption[]) => void;
 }) => {
-  const [viewOptions, setViewOptions] = React.useState(true);
-  const [newNumber, setNewNumber] = React.useState("");
+  const [viewOptions, setViewOptions] = useState(true);
+  const [newNumber, setNewNumber] = useState("");
+
+  const [label, setLabel] = useState(option.label);
 
   const handleDeleteOption = () => {
     const updatedOptions = options.filter((opt) => opt.id !== option.id);
     setOptions(updatedOptions);
   };
+
   const handleAddNumber = (option: MenuOption, newNumber: string) => {
     if (newNumber.trim()) {
       const updatedOption: MenuOption = {
@@ -46,6 +49,23 @@ const MenuOptionCard = ({
     const updatedOption: MenuOption = {
       ...option,
       number: option.number.filter((num) => num !== numberToDelete),
+    };
+
+    const updatedOptions = options.map((opt) =>
+      opt.id === option.id ? updatedOption : opt
+    );
+
+    setOptions(updatedOptions);
+  };
+
+  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLabel(e.target.value);
+  };
+
+  const handleLabelBlur = () => {
+    const updatedOption: MenuOption = {
+      ...option,
+      label,
     };
 
     const updatedOptions = options.map((opt) =>
@@ -84,6 +104,9 @@ const MenuOptionCard = ({
               type="text"
               className="custom-input"
               placeholder="This is for you to identify the menu option. Eg, Sales Menu"
+              value={label}
+              onChange={handleLabelChange}
+              onBlur={handleLabelBlur}
               required
             />
           </div>
@@ -105,7 +128,6 @@ const MenuOptionCard = ({
                 key={index}
                 direction={"row"}
                 alignItems="center"
-                // spacing={1}
                 className="number-stack"
                 sx={{ width: "100%" }}
               >
@@ -120,38 +142,41 @@ const MenuOptionCard = ({
                 </div>
               </Stack>
             ))}
+            {option.number.length < 9 && (
+              <>
+                <div className="input-container">
+                  <AddIconIllustration />
+                  <input
+                    type="text"
+                    className="custom-input"
+                    placeholder="Eg, 1234567890"
+                    value={newNumber}
+                    onChange={(e) => setNewNumber(e.target.value)}
+                    required
+                  />
+                </div>
 
-            <div className="input-container">
-              <AddIconIllustration />
-              <input
-                type="text"
-                className="custom-input"
-                placeholder="Eg, 1234567890"
-                value={newNumber}
-                onChange={(e) => setNewNumber(e.target.value)}
-                required
-              />
-            </div>
-
-            <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              style={{
-                cursor: "pointer",
-              }}
-              onClick={() => handleAddNumber(option, newNumber)} // call the handler when clicked
-            >
-              <IoAddCircle size={30} color="#307CD8" />
-              <Typography
-                style={{
-                  font: "normal normal 600 11px/14px Montserrat",
-                  color: "#307CD8",
-                }}
-              >
-                ADD TARGET NUMBERS
-              </Typography>
-            </Stack>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  alignItems="center"
+                  style={{
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleAddNumber(option, newNumber)}
+                >
+                  <IoAddCircle size={30} color="#307CD8" />
+                  <Typography
+                    style={{
+                      font: "normal normal 600 11px/14px Montserrat",
+                      color: "#307CD8",
+                    }}
+                  >
+                    ADD TARGET NUMBERS
+                  </Typography>
+                </Stack>
+              </>
+            )}
             {options.length !== 1 && (
               <Stack
                 direction="row"

@@ -11,7 +11,10 @@ const AddMenuOption = ({
   setOptions: (options: MenuOption[]) => void;
 }) => {
   const handleAddOption = () => {
-    setOptions([...options, { id: options.length + 1, label: "", number: [] }]);
+    setOptions([
+      ...options,
+      { id: options.length + 1, label: "Menu 2", number: [] },
+    ]);
   };
   return (
     <Stack
@@ -55,7 +58,9 @@ const MenuOptions = ({
           setOptions={setOptions}
         />
       ))}
-      <AddMenuOption options={options} setOptions={setOptions} />
+      {options.length < 2 && (
+        <AddMenuOption options={options} setOptions={setOptions} />
+      )}
     </Stack>
   );
 };

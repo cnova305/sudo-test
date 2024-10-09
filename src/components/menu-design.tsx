@@ -1,13 +1,14 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
 import { MenuOption } from "../types";
 import MenuOptions from "./menu-options";
 
-const MenuDesign = () => {
-  const [options, setOptions] = React.useState<MenuOption[]>([
-    { id: 1, label: "", number: [] },
-  ] as MenuOption[]);
-
+const MenuDesign = ({
+  options,
+  setOptions,
+}: {
+  options: MenuOption[];
+  setOptions: (options: MenuOption[]) => void;
+}) => {
   return (
     <Stack direction="column" spacing={2}>
       <Box>

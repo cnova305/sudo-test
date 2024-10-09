@@ -87,23 +87,35 @@ const SelectFiles = ({
         </Box>
       )}
       {files.length > 0 ? (
-        <div className="number-container">
-          <Stack
-            sx={{ px: 1, width: "100%" }}
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Typography
-              sx={{ font: "normal normal bold 13px/16px Montserrat" }}
+        <Stack direction="column">
+          <div className="number-container">
+            <Stack
+              sx={{ px: 1, width: "100%" }}
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
             >
-              {files[0].name}
-            </Typography>{" "}
-            <Box onClick={() => onChange([])}>
-              <DeleteIconIllustration />
-            </Box>
-          </Stack>
-        </div>
+              <Typography
+                sx={{ font: "normal normal bold 13px/16px Montserrat" }}
+              >
+                {files[0].name}
+              </Typography>{" "}
+              <Box onClick={() => onChange([])}>
+                <DeleteIconIllustration />
+              </Box>
+            </Stack>
+          </div>
+          <Box sx={{ py: 1 }} onClick={() => onChange([])}>
+            <Typography
+              style={{
+                font: "normal normal 600 11px/14px Montserrat",
+                color: "#307CD8",
+              }}
+            >
+              UPLOAD NEW FILE
+            </Typography>
+          </Box>
+        </Stack>
       ) : (
         <Stack
           {...getRootProps()}

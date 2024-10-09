@@ -1,7 +1,16 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
+import React from "react";
 import "../App.css";
 
-const Name = () => {
+interface NameProps {
+  onNameChange: (name: string) => void;
+}
+
+const Name: React.FC<NameProps> = ({ onNameChange }) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onNameChange(event.target.value);
+  };
+
   return (
     <Stack
       spacing={2}
@@ -25,6 +34,7 @@ const Name = () => {
           className="custom-input"
           placeholder="Eg, Instagram Campaign"
           required
+          onChange={handleInputChange}
         />
       </div>
     </Stack>

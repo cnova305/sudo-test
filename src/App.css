@@ -3,12 +3,34 @@
   height: 100vh;
   flex-direction: column;
   display: flex;
+  background: #f5f5f5;
+  /* align-items: center;
+  justify-content: center; */
+}
+.title-block {
+  height: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  background: #0b1c34 0% 0% no-repeat padding-box;
 }
 
 .container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 95%;
+}
+
+.design-container {
+  width: 35%;
   overflow-y: scroll;
+  padding: 20px;
+}
+
+.view-container {
+  width: 70%;
   padding: 20px;
 }
 
