@@ -13,7 +13,7 @@ const AddMenuOption = ({
   const handleAddOption = () => {
     setOptions([
       ...options,
-      { id: options.length + 1, label: "Menu 2", number: [] },
+      { id: options.length + 1, label: "Menu 2", number: ["-"] },
     ]);
   };
   return (
